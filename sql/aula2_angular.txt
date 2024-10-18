@@ -1,0 +1,79 @@
+aula 2 de angular 
+
+import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-meu-componente',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './meu-componente.component.html',
+  styleUrl: './meu-componente.component.scss'
+})
+export class MeuComponenteComponent {
+  // @Input("meu-nome") meuNome = "joana😊"
+  @Input({ alias: "meu-nome", required: true }) meuNome = "jdsdoana😊"
+  mensagem = "Eu adoro gatos"
+  idade = 60
+  imagem = "https://images.pexels.com/photos/4792071/pexels-photo-4792071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+
+  estadoAtivado = false
+  corDeTexto = "rgba(50,50,0,0.5)";
+  corDeFundo = "#369";
+
+  onClick() {
+    this.estadoAtivado = !this.estadoAtivado
+    this.meuNome = "laura"
+    this.corDeFundo = "#147"
+
+  }
+
+}
+<p>meu-componente works!</p>
+<p>outro-componente works!</p>
+<h2> Olá eu sou {{meuNome}}</h2>
+  <p [style.color]="corDeTexto"
+  [style.backgroundColor]="corDeFundo"
+  >{{ mensagem}}
+</p>
+
+  <p>{{idade +2}}</p>
+  <button [disabled]="!estadoAtivado"> olá olá </button>
+  <button (click)="onClick()" >alterar estado </button>
+<input type="color" name="" id="" [(ngModel)]="corDeFundo"/>
+
+
+
+  <img [src]="imagem" alt=""/>
+
+app componente
+<router-outlet />
+<h1>ola mundo!</h1>
+
+<app-meu-componente meu-nome="Teixeira"/>
+<app-meu-componente meu-nome="Quint"/>
+ ----------------------------------------
+<app-outro-componente>
+
+
+
+<app-outro-componente/>
+--------
+
+
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { MeuComponenteComponent } from "./components/meu-componente/meu-componente.component";
+import { OutroComponenteComponent } from "./components/outro-componente/outro-componente.component";
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, MeuComponenteComponent, OutroComponenteComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent {
+  title = 'prijetoangular_primeiro';
+}
+
