@@ -1,0 +1,765 @@
+kotlin
+
+exercício slides números prims
+
+class MainActivity : AppCompatActivity() {
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+
+        binding.parId.setOnClickListener {
+            val perguntas: Int = binding.perguntaId.text.toString().toInt();
+
+
+
+            if (perguntas % 2.0 == 0.toDouble()) {
+                binding.parId.text = "o numero é par"
+
+            } else {
+                binding.parId.text = " 0 numero é impar"
+            }
+
+
+
+            for (i in 2 until (perguntas.toInt())) {
+
+
+                if (perguntas % perguntas == 0.toDouble() && ((perguntas%i) != 0.toDouble())) {
+                    binding.primoId.text = "o numero é primo"
+
+                } else {
+
+                    binding.primoId.text = "o numero é não primo"
+
+                }
+            }
+        }
+    }
+}
+
+slides 5 exercício splash
+
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_main)
+
+    Handler(Looper.getMainLooper()).postDelayed({
+        val intent = Intent(this, MainActivity2::class.java)
+        startActivity(intent)
+        finish()
+    }, 3000)
+}
+}
+
+android manifest trocar não esquecer
+
+ <activity
+            android:name=".MainActivity2"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" >
+
+
+        </activity>
+
+
+exericios nome pass sem toast
+
+ackage com.example.exr546
+
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.exr546.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+
+        binding.btnValidacao.setOnClickListener {
+
+            val nome: String = binding.user.text.toString();
+            val pass: String = binding.pass.text.toString();
+            if (nome != "user" || pass != "pass") {
+                val intent = Intent(this, MainActivity3::class.java)
+                startActivity(intent)
+
+            } else {
+                val intent = Intent(this, MainActivity2::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+}
+
+class MainActivity3 : AppCompatActivity() {
+    private val binding by lazy {
+        ActivityMain3Binding.inflate(layoutInflater)
+    }
+
+
+            override fun onCreate(savedInstanceState: Bundle?) {
+                super.onCreate(savedInstanceState)
+
+                setContentView(binding.root)
+
+
+
+                Toast.makeText(applicationContext, "login errado ", Toast.LENGTH_SHORT).show()
+
+                binding.btnLoginerrado.setOnClickListener {
+
+
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+
+                }
+            }
+        }
+
+
+aulas inicias 
+package com.example.aula2
+
+import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.aula2.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+        binding.editButtonConverterdolares.setOnClickListener {
+            val euros = binding.editValoreuros.text.toString()
+            val dolares = euros.toDouble() * 0.8;
+            binding.textValorFinal.setText("${dolares}")
+        }
+        binding.editButtonConverterpeso.setOnClickListener {
+            val euros = binding.editValoreuros.text.toString()
+            val pesos = euros.toDouble() * 0.7;
+            binding.textValorFinal.setText("${pesos}")
+        }
+
+        binding.editButtonConverterreal.setOnClickListener {
+            val euros = binding.editValoreuros.text.toString()
+            val reais = euros.toDouble() * 0.5;
+            binding.textValorFinal.setText("${reais}")
+        }
+    }
+}
+
+9 exer 2 shared
+
+package com.example.a9ex2
+
+import android.content.Context
+import android.content.SharedPreferences
+import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.a9ex2.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        val sharedPreferences = this.getSharedPreferences("chave", Context.MODE_PRIVATE)
+        val listausuario = sharedPreferences.getString("lista", "").toString()
+        binding.editText.setText(listausuario)
+
+        binding.btnGravar.setOnClickListener {
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.putString(
+                "username",
+                binding.editText.text.toString()
+            )
+
+
+            editor.apply()
+
+        }
+    }
+}
+
+9 exercício 3
+musica
+package com.example.a9exercicio3
+
+import android.content.Context
+import android.media.MediaPlayer
+import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.a9exercicio3.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+
+9 exercício 1
+
+override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        val sharedPreferences = this.getSharedPreferences("chave", Context.MODE_PRIVATE)
+        val userds = sharedPreferences.getString("username", "").toString()
+        binding.editUser.setText(userds)
+
+
+        binding.btnLog.setOnClickListener {
+
+            val nome: String = binding.editUser.text.toString();
+            val pass: String = binding.editPass.text.toString();
+
+
+            if (nome != "user" || pass != "pass") {
+
+                Toast.makeText(applicationContext, "login errado ", Toast.LENGTH_SHORT).show()
+
+
+            } else {
+
+                val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                editor.putString(
+                    "username",
+                    binding.editUser.text.toString()
+                )
+
+
+                editor.apply()
+
+
+                Toast.makeText(applicationContext, "login valido ", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+    }
+}
+
+exerciio slides exer2
+lass MainActivity : AppCompatActivity() {
+
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        {
+            {
+                val listavalor = ArrayList<Valores>()
+
+
+                binding.editButtonAdd.setOnClickListener {
+
+                    listavalor.add(Valores(binding.editValor.text.toString().toInt()))
+                    binding.listView.adapter =
+                        ArrayAdapter(this, android.R.layout.simple_list_item_1, listavalor)
+
+                }
+                binding.listView.setOnItemClickListener { parent, view, position, id ->
+                    Toast.makeText(
+                        this,
+                        listavalor.get(position).valor.toString(),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+
+            }
+
+abrur nova class kotlin valores 
+lass Valores (val  valor: Int){
+
+    override  fun toString(): String{
+        return "$valor"}
+}
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+
+
+        binding.btnSon.setOnClickListener {
+            val mediaPlayer = MediaPlayer.create(applicationContext, R.raw.ring)
+            mediaPlayer.start()
+        }
+        binding.btnBell.setOnClickListener {
+            val mediaPlayer = MediaPlayer.create(applicationContext, R.raw.bell)
+            mediaPlayer.start()
+
+        }
+        binding.btnRing.setOnClickListener {
+            val mediaPlayer = MediaPlayer.create(applicationContext, R.raw.bull)
+            mediaPlayer.start()
+        }
+    }
+}
+
+
+exercício 3 slides 8
+package com.example.exercidio3slide8
+
+import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.exercidio3slide8.databinding.ActivityMain2Binding
+
+class MainActivity2 : AppCompatActivity() {
+
+        private val binding by lazy {
+            ActivityMain2Binding.inflate(layoutInflater)
+        }
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(binding.root)
+
+            val i= intent
+            val nomealuno= i.getStringExtra("nomealuno")
+            val moradalista= i.getStringExtra("moradalista")
+            val email= i.getStringExtra("email")
+
+            binding.textViewNome.text = nomealuno
+            binding.textViewMorada.text = moradalista
+            binding.textViewEmail.text = email
+        }
+}
+
+package com.example.exercidio3slide8
+
+import android.R
+import android.content.Intent
+import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.exercidio3slide8.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+
+        private val binding by lazy {
+            ActivityMainBinding.inflate(layoutInflater)
+        }
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(binding.root)
+
+
+            val nomealuno = ArrayList<String>()
+
+
+            nomealuno.add("joao")
+            nomealuno.add("Ana")
+            nomealuno.add("Eva")
+            binding.listView.adapter =
+                ArrayAdapter(this, android.R.layout.simple_list_item_1, nomealuno)
+            val moradalista = ArrayList<String>()
+
+            moradalista.add("Rua Rodrigues")
+            moradalista.add("Rua Sé")
+            moradalista.add("Rua das Flores")
+
+
+            val email = ArrayList<String>()
+            email.add("joao@gmail.com")
+            email.add("ana@gmail.com")
+            email.add("eva@gmail.com")
+
+
+
+
+            binding.listView.setOnItemClickListener { parent, view, position, id ->
+
+
+
+                val i: Intent = Intent(this, MainActivity2::class.java)
+                i.putExtra("nomealuno", nomealuno[position])
+                i.putExtra("moradalista", moradalista[position])
+                i.putExtra("email", email[position])
+                startActivity(i)
+
+
+            }
+
+        }
+
+    }
+
+exercício 1 slides 8
+
+package com.example.exercicio1
+
+import android.R
+import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.exercicio1.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+
+        val listautilizador = ArrayList<String>()
+
+        listautilizador.add("joana")
+        listautilizador.add("pedro")
+
+        binding.listView.adapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, listautilizador)
+
+        binding.listView.setOnItemClickListener { parent, view, position, id ->
+            Toast.makeText(this,"olá  ${listautilizador.get(position)}", Toast.LENGTH_SHORT).show()
+        }
+    }}
+
+exer3 slides 7
+
+private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(binding.root)
+
+
+
+
+
+        binding.buttonRegisto.setOnClickListener {
+
+
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+
+        }
+        binding.buttonLogin.setOnClickListener {
+
+
+            val intent = Intent(this, MainActivity3::class.java)
+            startActivity(intent)
+        }
+
+        binding.buttonSobre.setOnClickListener {
+
+
+            val intent = Intent(this, MainActivity4::class.java)
+            startActivity(intent)
+        }
+    }}
+
+package com.example.exercicio3slides7
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.exercicio3slides7.databinding.ActivityMain2Binding
+import com.example.exercicio3slides7.databinding.ActivityMainBinding
+
+class MainActivity2 : AppCompatActivity() {
+    private val binding by lazy {
+        ActivityMain2Binding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+
+        binding.btnRegisto.setOnClickListener {
+
+
+            val nome: String = binding.idUser.text.toString();
+            val pass: String = binding.idPass.text.toString();
+
+            val i: Intent = Intent(this, MainActivity3::class.java)
+            i.putExtra("nome", nome)
+            i.putExtra("pass", pass)
+            startActivity(i)
+
+
+        }
+    }
+}class MainActivity3 : AppCompatActivity() {
+    private val binding by lazy {
+        ActivityMain3Binding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        binding.btn4Validacao.setOnClickListener {
+
+        val i = intent
+        val user = i.extras?.getString("user").toString()
+        val pass = i.extras?.getString("pass").toString()
+
+        val userput = binding.userId.text.toString()
+        val passput= binding.passwordId.text.toString()
+
+            if ((user == userput && pass == passput)) {
+                Toast.makeText(applicationContext, "login valido ", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainActivity4::class.java)
+                startActivity(intent)
+            }
+
+            else {
+
+                    //val intent = Intent(this, MainActivity3::class.java)
+                    // startActivity(intent)
+                    Toast.makeText(applicationContext, "login errado ", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainActivity2::class.java)
+                startActivity(intent)
+                }
+
+
+
+            }
+
+
+        }
+    }
+package com.example.exercicio3slides7
+
+import android.content.Intent
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+
+class splash : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_splash)
+
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }, 3000)
+                }
+
+
+        }
+
+exer 1 slides 7
+
+package com.example.slides7ex1
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.slides7ex1.databinding.ActivityMain2Binding
+import com.example.slides7ex1.databinding.ActivityMainBinding
+
+class MainActivity2 : AppCompatActivity() {
+    private val binding by lazy {
+        ActivityMain2Binding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+val i= intent
+        val nome= i.extras?.getString("name")
+        val email= i.extras?.getString("email")
+        val genero= i.extras?.getString("genero")
+        val telefone= i.extras?.getString("telefone")
+        val morada= i.extras?.getString("morada")
+        binding.textResultado.text="ola ${nome} mora na $morada, tem o telefone $telefone e o email ${email}"
+
+
+        }
+    }
+
+
+lass MainActivity : AppCompatActivity() {
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+        binding.editButtonConverterdolares.setOnClickListener {
+
+
+            val name = binding.editNome.text.toString()
+            val email = binding.editEmail.text.toString()
+            val genero = binding.editGenero.text.toString()
+            val telefone = binding.editTelefone.text.toString()
+            val morada = binding.editMorada.text.toString()
+            val i: Intent = Intent(this, MainActivity2::class.java)
+            i.putExtra("name", name)
+            i.putExtra("email", email)
+            i.putExtra("telefone",telefone)
+            i.putExtra("morada",morada)
+            startActivity(i)
+        }
+    }
+}
+
+ex7 2
+
+class MainActivity : AppCompatActivity() {
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+        binding.editButtonConverterdolares.setOnClickListener {
+            val valor =binding.editValor.text.toString()
+
+            val i: Intent = Intent(this, MainActivity2::class.java)
+            i.putExtra("valor", valor)
+
+            startActivity(i)
+
+
+        }
+    }
+        }
+
+
+class MainActivity2 : AppCompatActivity() {
+    private val binding by lazy {
+        ActivityMain2Binding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        val i = intent
+        val valor = i.extras?.getString("valor")
+
+
+        binding.editButtonConverterdolares.setOnClickListener {
+
+
+            val valor2 = binding.editValordois.text.toString()
+
+            val i: Intent = Intent(this, MainActivity3::class.java)
+
+            i.putExtra("valordois", valor2)
+            i.putExtra("valor", valor)
+            startActivity(i)
+        }
+    }
+}
+
+
+class MainActivity3 : AppCompatActivity() {
+    private val binding by lazy {
+        ActivityMain3Binding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        val i = intent
+        val valor = i.extras?.getString("valor").toString().toInt()
+        val valor2 = i.extras?.getString("valordois").toString().toInt()
+        val soma= valor + valor2
+        val diferenca=valor - valor2
+        val divisao=valor / valor2
+        val produto  =valor * valor2
+
+
+        binding.idSoma.text="$soma"
+        binding.idProduto.text="$produto"
+        binding.idDiferenca.text="$diferenca"
+        binding.editDivisao.text="$divisao"
+
+
+
+
+        }
+    }
+
+
+
