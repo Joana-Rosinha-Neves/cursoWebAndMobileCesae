@@ -1,0 +1,69 @@
+exercicio listas 
+
+1. Estrutura da Atividade Principal (MainActivity)
+kotlin
+Copiar código
+class MainActivity : AppCompatActivity() {
+Aqui, você define a MainActivity, que é a classe principal do seu aplicativo. Ela herda de AppCompatActivity, que é uma classe base para atividades em Android que oferece compatibilidade com versões antigas do Android.
+2. binding: Ligando os elementos da interface com o código
+kotlin
+Copiar código
+private val binding by lazy {
+    ActivityMainBinding.inflate(layoutInflater)
+}
+binding é uma variável usada para acessar os elementos da interface definidos no arquivo XML (activity_main.xml).
+O by lazy é utilizado para inicializar o binding de forma eficiente. A expressão dentro dele só é executada quando for usada pela primeira vez.
+ActivityMainBinding.inflate(layoutInflater) infla (carrega) a interface da atividade e conecta o código à interface.
+3. onCreate: Método que inicializa a atividade
+kotlin
+Copiar código
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(binding.root)
+O método onCreate é chamado quando a atividade é criada.
+setContentView(binding.root) define o layout da interface, associando o layout inflado ao conteúdo da tela.
+4. Criando uma lista de objetos Utilizador
+kotlin
+Copiar código
+val listaUtilizadores = ArrayList<Utilizador>()
+Aqui, você cria uma lista chamada listaUtilizadores, do tipo ArrayList, que armazenará objetos da classe Utilizador.
+5. Adicionando objetos Utilizador à lista
+kotlin
+Copiar código
+listaUtilizadores.add(Utilizador("user1", "pass1",911222333))
+listaUtilizadores.add(Utilizador("user2", "pass2",922333444))
+// E assim por diante...
+Neste ponto, você está criando novos objetos da classe Utilizador e adicionando-os à lista. Cada Utilizador tem três parâmetros: username, password, e telemovel (número de telefone).
+6. Ligando a lista ao ListView com ArrayAdapter
+kotlin
+Copiar código
+binding.listAula.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaUtilizadores)
+Aqui, você está configurando um ArrayAdapter para associar a lista listaUtilizadores ao ListView (binding.listAula), que é um componente de interface responsável por exibir a lista na tela.
+O ArrayAdapter converte a lista de objetos em um formato que o ListView possa exibir.
+android.R.layout.simple_list_item_1 é um layout de item simples fornecido pelo Android, que será usado para exibir os nomes de usuários na lista.
+7. Tratando eventos de clique em itens da lista
+kotlin
+Copiar código
+binding.listAula.setOnItemClickListener { parent, view, position, id ->
+    Toast.makeText(this, listaUtilizadores[position].password, Toast.LENGTH_SHORT).show()
+}
+Aqui, você está definindo o que acontece quando o usuário clica em um item da lista.
+setOnItemClickListener é um método que permite capturar cliques em itens da lista.
+Quando um item da lista é clicado, um Toast (uma pequena mensagem popup) é exibido com a senha (password) do Utilizador correspondente à posição clicada.
+8. A classe Utilizador
+kotlin
+Copiar código
+class Utilizador(val username: String, val password: String, val telemovel: Int) {
+Essa é a classe Utilizador, que define o modelo de um objeto Utilizador. Cada Utilizador tem três propriedades: username, password, e telemovel.
+9. Sobrescrevendo o método toString
+kotlin
+Copiar código
+override fun toString(): String {
+    return "${username}"
+}
+O método toString foi sobrescrito para que, ao exibir um objeto Utilizador na interface, o Android mostre apenas o username. Isso é útil porque, por padrão, o ArrayAdapter tentaria exibir a representação padrão do objeto (que seria algo como com.example.Utilizador@...).
+Resumo geral:
+Você cria uma lista de usuários (Utilizador), onde cada um tem um nome de usuário, senha e número de telefone.
+Essa lista é exibida na tela usando um ListView e um ArrayAdapter.
+Quando o usuário clica em um item da lista, uma mensagem Toast exibe a senha correspondente.
+Se precisar de mais alguma explicação ou ajuste no código, estou à disposição!

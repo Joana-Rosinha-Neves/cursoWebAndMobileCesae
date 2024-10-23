@@ -1,5 +1,9 @@
 kotlin
 
+buildFeatures {
+        viewBinding = true
+    }
+
 exercício slides números prims
 
 class MainActivity : AppCompatActivity() {
