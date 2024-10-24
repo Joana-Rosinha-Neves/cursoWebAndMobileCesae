@@ -1,0 +1,116 @@
+aula2:
+
+
+
+na view <p>{{$myfirstVariavel}}</p>
+ 
+no indexcontroller 
+
+public function home(){
+
+        $myfirstVariavel="hello world";
+
+        return view('utils.home',compact ('myfirstVariavel'));
+
+    }
+
+Route::get('/home', [IndexController::class,'home']);
+ 
+ 
+lass IndexController extends Controller
+
+{
+
+    public function welcome(){
+
+        $weekDays=['Segunda', 'Terca', 'Quarta'];
+
+     return view('users.welcome','weekDays');
+
+    }
+ 
+    public function home(){
+
+        $myfirstVariavel="hello world";
+
+        $weekDays=['Segunda', 'Terca', 'Quarta'];
+
+        //dd($weekDays);
+
+        //var_dump
+
+        $info=$this->getCesaeInfo();
+
+        $weekDays=$this->getAllWeekDays();
+
+        $infor=$this->getCouserInfo();
+
+        return view('utils.home',compact ('myfirstVariavel','weekDays','info','infor'));
+
+    }
+ 
+private function getAllWeekDays(){
+
+    $weekDays=['Segunda', 'Terca', 'Quarta'];
+
+    return $weekDays;
+ 
+}
+ 
+private function getCouserInfo (){
+
+    $cousrseInfo=[
+
+        'name' =>'web',
+
+        'hours'=> 950
+
+        ];
+
+return $cousrseInfo;
+
+}
+
+public function getCesaeInfo(){
+ 
+    $cesaeInfo = [
+
+        'name' => 'Cesae',
+
+        'address' => 'Rua Ciríaco Cardoso 186, 4150-212 Porto',
+
+        'email' => 'cesae@cesae.pt'
+
+        ];
+ 
+        return $cesaeInfo;
+ 
+}
+
+}
+ 
+na blade fica
+<h3> Dados do curso </h3>
+<p>{{$infor['name']}}</p>
+<p>{{$infor['hours']}}</p>
+ 
+        <p>{{$info['name']}}
+ 
+@endsection
+ 
+h3> Dados do curso </h3>
+<p>{{$infor['name']}}</p>
+<p>{{$infor['hours']}}</p>
+ 
+        <p>{{$info['name']}}</p>
+<p>{{$info['address']}}</p>
+<p> {{$info['email']}}</p>
+ 
+ 
+            <h3> Dados do curso </h3>
+<
+ 
+@endsection
+ 
+ 
+ 
